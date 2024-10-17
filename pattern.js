@@ -1,5 +1,4 @@
 let variationCounter = 0;
-const totalVariations = 100000; // Placeholder for total possible variations
 
 const canvas = document.getElementById("patternCanvas");
 const ctx = canvas.getContext("2d");
