@@ -35,17 +35,9 @@
       border: none;
       cursor: pointer;
     }
-    #variationCount, #totalVariations {
+    #variation-info {
       font-size: 18px;
       margin-top: 10px;
-    }
-
-    /* For mobile devices */
-    @media (max-width: 768px) {
-      #pattern-container {
-        width: 300px;
-        height: 300px;
-      }
     }
   </style>
 </head>
@@ -56,9 +48,7 @@
 </div>
 
 <button onclick="generatePattern()">Generate New Pattern</button>
-
-<p id="variationCount">Variation #0</p>
-<p id="totalVariations">Total Possible Variations: 2,160,000</p>
+<p id="variation-info">Current Variation: 1/25000</p>
 
 <!-- Link to the external JS file -->
 <script src="pattern.js"></script>
