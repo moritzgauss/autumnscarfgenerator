@@ -1,63 +1,99 @@
-function randomColor(minR, maxR, minG, maxG, minB, maxB) {
-  return `rgb(${Math.floor(Math.random() * (maxR - minR + 1)) + minR}, 
-               ${Math.floor(Math.random() * (maxG - minG + 1)) + minG}, 
-               ${Math.floor(Math.random() * (maxB - minB + 1)) + minB})`;
+let variationCounter = 0;
+const totalVariations = 2160000; // Rough calculation of total possible variations
+
+const canvas = document.getElementById("patternCanvas");
+const ctx = canvas.getContext("2d");
+
+function randomBeige() {
+  return `rgb(${230 + Math.random() * 20}, ${210 + Math.random() * 10}, ${180 + Math.random() * 10})`;
+}
+
+function randomRed() {
+  return `rgb(${150 + Math.random() * 40}, 0, 0)`;
+}
+
+function drawPlaidStripes() {
+  const stripeSpacing = 90 + Math.random() * 10;
+  const blackLineWidth = 12 + Math.random() * 3;
+  const whiteLineWidth = 6 + Math.random() * 3;
+  const redLineWidth = 3 + Math.random() * 3;
+
+  // Beige background
+  ctx.fillStyle = randomBeige();
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Draw black stripes
+  ctx.strokeStyle = 'black';
+  ctx.lineWidth = blackLineWidth;
+  for (let i = 0; i < canvas.width; i += stripeSpacing) {
+    ctx.beginPath();
+    ctx.moveTo(i, 0);
+    ctx.lineTo(i, canvas.height);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(0, i);
+    ctx.lineTo(canvas.width, i);
+    ctx.stroke();
+  }
+
+  // Draw white stripes
+  ctx.strokeStyle = 'white';
+  ctx.lineWidth = whiteLineWidth;
+  for (let i = 0; i < canvas.width; i += stripeSpacing * 1.5) {
+    ctx.beginPath();
+    ctx.moveTo(i + stripeSpacing / 4, 0);
+    ctx.lineTo(i + stripeSpacing / 4, canvas.height);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(0, i + stripeSpacing / 4);
+    ctx.lineTo(canvas.width, i + stripeSpacing / 4);
+    ctx.stroke();
+  }
+
+  // Draw red stripes
+  ctx.strokeStyle = randomRed();
+  ctx.lineWidth = redLineWidth;
+  for (let i = 0; i < canvas.width; i += stripeSpacing * 3) {
+    ctx.beginPath();
+    ctx.moveTo(i + stripeSpacing / 2, 0);
+    ctx.lineTo(i + stripeSpacing / 2, canvas.height);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(0, i + stripeSpacing / 2);
+    ctx.lineTo(canvas.width, i + stripeSpacing / 2);
+    ctx.stroke();
+  }
+}
+
+function drawHatching() {
+  const hatchSpacing = 10 + Math.random() * 5;
+  ctx.strokeStyle = 'rgba(0, 0, 0, 0.1)';
+  ctx.lineWidth = 1;
+
+  // Draw diagonal hatching
+  for (let i = -canvas.height; i < canvas.width; i += hatchSpacing) {
+    ctx.beginPath();
+    ctx.moveTo(i, 0);
+    ctx.lineTo(i + canvas.height, canvas.height);
+    ctx.stroke();
+  }
+
+  for (let i = 0; i < canvas.width; i += hatchSpacing) {
+    ctx.beginPath();
+    ctx.moveTo(i, 0);
+    ctx.lineTo(i - canvas.height, canvas.height);
+    ctx.stroke();
+  }
 }
 
 function generatePattern() {
-  const canvas = document.getElementById('patternCanvas');
-  const ctx = canvas.getContext('2d');
-  const width = canvas.width;
-  const height = canvas.height;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawPlaidStripes();
+  drawHatching();
 
-  ctx.clearRect(0, 0, width, height);
-
-  // Random colors for stripes with controlled color ranges
-  const beige = randomColor(200, 255, 180, 230, 150, 200); // light beige to light brown
-  const red = randomColor(120, 255, 0, 50, 0, 50); // dark red to bright red
-  const black = randomColor(0, 50, 0, 50, 0, 50); // black to dark gray
-  const white = randomColor(220, 255, 220, 255, 220, 255); // white to light gray
-
-  // Define stripe widths and hatching properties
-  const stripeWidth = Math.floor(Math.random() * 10) + 10; // random stripe width
-  const stripeSpacing = Math.floor(Math.random() * 50) + 50; // random spacing between stripes
-  const hatchDensity = Math.floor(Math.random() * 6) + 5; // density of hatching
-
-  // Draw background beige
-  ctx.fillStyle = beige;
-  ctx.fillRect(0, 0, width, height);
-
-  // Horizontal stripes (random spacing and widths)
-  for (let i = 0; i < height; i += stripeSpacing) {
-      ctx.fillStyle = black;
-      ctx.fillRect(0, i, width, stripeWidth);
-      ctx.fillStyle = red;
-      ctx.fillRect(0, i + stripeWidth + 5, width, stripeWidth);
-  }
-
-  // Vertical stripes (random spacing and widths)
-  for (let i = 0; i < width; i += stripeSpacing) {
-      ctx.fillStyle = black;
-      ctx.fillRect(i, 0, stripeWidth, height);
-      ctx.fillStyle = red;
-      ctx.fillRect(i + stripeWidth + 5, 0, stripeWidth, height);
-  }
-
-  // Draw hatching effect
-  ctx.strokeStyle = white;
-  ctx.lineWidth = 1;
-  for (let i = -height; i < width; i += hatchDensity) {
-      ctx.beginPath();
-      ctx.moveTo(i, 0);
-      ctx.lineTo(i + height, height);
-      ctx.stroke();
-  }
-
-  // Update total pattern count
-  document.getElementById('variationCount').innerText = "Total Variations: 1,250,000";
+  // Increment variation counter
+  variationCounter++;
+  document.getElementById('variationCount').innerText = `Variation #${variationCounter}`;
 }
 
-// Total possible variations
-const totalVariations = 50 * 20 * 10 * 10 * 5 * 5 * 5;
-
-document.getElementById('variationCount').innerText = `Total Variations: ${totalVariations}`;
+document.getElementById('totalVariations').innerText = `Total Possible Variations: ${totalVariations}`;
