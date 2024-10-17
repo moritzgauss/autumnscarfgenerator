@@ -46,6 +46,11 @@
       margin-top: 10px;
     }
 
+    #totalVariations {
+      font-size: 18px; /* Adjust font size for total variations */
+      margin-top: 10px; /* Space above total variations text */
+    }
+
     /* Media query for mobile view */
     @media (max-width: 768px) {
       #pattern-container {
@@ -54,11 +59,6 @@
         transform: scale(0.5); /* Scale down the container to 50% */
         transform-origin: top left; /* Set origin for scaling */
       }
-    }
-
-    #totalVariations {
-      font-size: 18px; /* Adjust font size for total variations */
-      margin-top: 10px; /* Space above total variations text */
     }
   </style>
 </head>
@@ -71,7 +71,6 @@
 <button onclick="generatePattern()">Generate New Pattern</button>
 <p id="variation-info">Current Variation: 1/25000</p>
 
-<!-- Link to the external JS file -->
 <script src="pattern.js"></script>
 
 </body>

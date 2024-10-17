@@ -1,4 +1,79 @@
-let variationCounter = 0;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Burberry Pattern Generator</title>
+  <style>
+    body {
+      font-family: 'Pinyon Script', cursive;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      margin: 0; /* Ensure no default margin */
+    }
+
+    #pattern-container {
+      width: 600px;
+      height: 600px;
+      border: 2px solid black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      overflow: hidden; /* Prevent overflow */
+    }
+
+    canvas {
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #333;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    #variation-info {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    #totalVariations {
+      font-size: 18px; /* Adjust font size for total variations */
+      margin-top: 10px; /* Space above total variations text */
+    }
+
+    /* Media query for mobile view */
+    @media (max-width: 768px) {
+      #pattern-container {
+        width: 300px; /* Adjust width for mobile */
+        height: 300px; /* Adjust height for mobile */
+        transform: scale(0.5); /* Scale down the container to 50% */
+        transform-origin: top left; /* Set origin for scaling */
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="pattern-container">
+  <canvas id="patternCanvas" width="600" height="600"></canvas>
+</div>
+
+<button onclick="generatePattern()">Generate New Pattern</button>
+<p id="variation-info">Current Variation: 1/25000</p>
+
+<script src="pattern.js"></script>
+<script>
+  let variationCounter = 0;
 
   const canvas = document.getElementById("patternCanvas");
   const ctx = canvas.getContext("2d");
@@ -141,3 +216,7 @@ let variationCounter = 0;
 
   // Generate the initial pattern on page load
   window.onload = generatePattern; // Ensure it generates on load
+</script>
+
+</body>
+</html>
