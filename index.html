@@ -52,12 +52,12 @@
     }
 
     /* Media query for mobile view */
-    @media (max-width: 768px) {
-      #pattern-container {
-        width: 300px; /* Adjust width for mobile */
-        height: 300px; /* Adjust height for mobile */
-        transform: scale(0.5); /* Scale down the container to 50% */
-        transform-origin: top left; /* Set origin for scaling */
+@media (max-width: 768px) {
+  #pattern-container {
+    width: 100%; /* Make the width 100% of the viewport width */
+    max-width: 300px; /* Restrict the width to 300px maximum */
+    height: auto; /* Adjust height automatically based on width */
+    max-height: 300px; /* Restrict the height to 300px maximum */
       }
     }
   </style>
