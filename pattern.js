@@ -141,3 +141,9 @@ let variationCounter = 0;
 
   // Generate the initial pattern on page load
   window.onload = generatePattern; // Ensure it generates on load
+
+function saveCanvasImage() {
+  const imageDataURL = canvas.toDataURL("image/png");
+  const newTab = window.open();
+  newTab.document.write(`<img src="${imageDataURL}" alt="Canvas Image"><p>Click and hold on image to save</p>`);
+}
